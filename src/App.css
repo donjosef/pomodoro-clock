@@ -1,3 +1,22 @@
+* {
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
+}
+
+.Controls-Wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Controls {
+  font-size: 1.7rem;
+}
+
+.Controls button {
+  background: transparent;
+  border: none;
+  font-size: 1.7rem;
+  padding: 10px;
 }
