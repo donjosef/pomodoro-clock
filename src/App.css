@@ -43,6 +43,28 @@
   margin: 0 0 20px;
 }
 
+button {
+  cursor: pointer;
+}
+.start_stop {
+  border: 2px solid #8AB9B5;
+  padding: 5px 15px;
+  background: transparent;
+  color: #8AB9B5;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.reset {
+  margin-left: 20px;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  background: #DB324D;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+}
 
 
 
