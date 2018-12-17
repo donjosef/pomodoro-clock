@@ -11,6 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+       <h1 className="app-title">Pomodoro Clock</h1>
        <div className="Controls-Wrapper">
         <Controls label="break" value={this.state.breakLength}/>
         <Controls label="session" value={this.state.sessionLength}/>

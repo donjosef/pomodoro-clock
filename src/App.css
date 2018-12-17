@@ -3,6 +3,14 @@
 }
 .App {
   text-align: center;
+  background: #2B4141;
+  color: white;
+}
+
+.app-title {
+  background: #8AB9B5;
+  padding: 20px 0;
+  margin: 0;
 }
 
 .Controls-Wrapper {
