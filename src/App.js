@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Controls from './components/Controls/Controls';
 import './App.css';
+import Display from './components/Display/Display';
 
 class App extends Component {
 
   state = {
     breakLength: 5,
-    sessionLength: 25
+    sessionLength: 25,
+    mode: 'session'
   }
   render() {
     return (
@@ -16,6 +18,7 @@ class App extends Component {
         <Controls label="break" value={this.state.breakLength}/>
         <Controls label="session" value={this.state.sessionLength}/>
        </div>
+       <Display mode={this.state.mode}/>
       </div>
     );
   }
