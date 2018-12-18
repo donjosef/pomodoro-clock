@@ -46,6 +46,39 @@ class App extends Component {
     }));
   }
   
+  changeLengthValues = (e, id) => {
+    switch(id) {
+      case 'break-decrement':
+       if(this.state.breakLength > 1) {
+        this.setState(prevState => ({
+          breakLength: prevState.breakLength -= 1
+        }));
+       }
+      break;
+      case 'break-increment':
+       if(this.state.breakLength < 60) {
+        this.setState(prevState => ({
+          breakLength: prevState.breakLength += 1
+        }));
+       }
+      break;
+      case 'session-decrement':
+       if(this.state.sessionLength > 1) {
+        this.setState(prevState => ({
+          sessionLength: prevState.sessionLength -= 1
+        }));
+       }
+      break;
+      case 'session-increment':
+       if(this.state.sessionLength < 60) {
+        this.setState(prevState => ({
+          sessionLength: prevState.sessionLength += 1
+        }));
+       }
+      break;
+    }
+  }
+
   resetHandler = () => {
     this.setState({
       breakLength: defaultBreak,
@@ -60,8 +93,8 @@ class App extends Component {
       <div className="App">
        <h1 className="app-title">Pomodoro Clock</h1>
        <div className="Controls-Wrapper">
-        <Controls label="break" value={this.state.breakLength}/>
-        <Controls label="session" value={this.state.sessionLength}/>
+        <Controls click={this.changeLengthValues} label="break" value={this.state.breakLength}/>
+        <Controls click={this.changeLengthValues} label="session" value={this.state.sessionLength}/>
        </div>
        <Display mode={this.state.mode} seconds={this.state.sessionSeconds}/>
        <Button type="start_stop" toggleTimer={this.toggleTimer}><FontAwesomeIcon icon={this.state.play ? 'pause' : 'play'} /></Button>
