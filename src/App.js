@@ -38,6 +38,15 @@ class App extends Component {
       clearInterval(this.interval);
     }
     
+    
+    if(prevState.sessionLength !== this.state.sessionLength) {
+      /*Every time i click on controls to change the values of session, change the respective seconds to display the correct time on Display*/
+      this.setState({
+        sessionSeconds: this.state.sessionLength * 60
+      })
+     
+    }
+    
   }
 
   timer = () => {
@@ -51,28 +60,31 @@ class App extends Component {
       case 'break-decrement':
        if(this.state.breakLength > 1) {
         this.setState(prevState => ({
-          breakLength: prevState.breakLength -= 1
+          breakLength: prevState.breakLength - 1
         }));
        }
       break;
+
       case 'break-increment':
        if(this.state.breakLength < 60) {
         this.setState(prevState => ({
-          breakLength: prevState.breakLength += 1
+          breakLength: prevState.breakLength + 1
         }));
        }
       break;
+
       case 'session-decrement':
        if(this.state.sessionLength > 1) {
         this.setState(prevState => ({
-          sessionLength: prevState.sessionLength -= 1
+          sessionLength: prevState.sessionLength - 1
         }));
        }
       break;
+
       case 'session-increment':
        if(this.state.sessionLength < 60) {
         this.setState(prevState => ({
-          sessionLength: prevState.sessionLength += 1
+          sessionLength: prevState.sessionLength + 1
         }));
        }
       break;
