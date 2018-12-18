@@ -56,6 +56,9 @@ class App extends Component {
   }
   
   changeLengthValues = (e, id) => {
+    if(this.state.play) {
+      return;
+    }
     switch(id) {
       case 'break-decrement':
        if(this.state.breakLength > 1) {
