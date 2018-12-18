@@ -8,7 +8,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 library.add(faPlus, faMinus);
 
 export default function (props) {
-  const {label, value} = props;
+  const {label, value, click} = props;
 
   let decrementId;
   let incrementId;
@@ -30,9 +30,19 @@ export default function (props) {
   return (
     <div className="Controls">
       <p id={labelId}>{label} length</p>
-      <button id={decrementId}><FontAwesomeIcon icon="minus" /></button>
+      <button 
+        id={decrementId}
+        onClick={(e) => click(e, decrementId)}
+        >
+        <FontAwesomeIcon icon="minus" />
+      </button>
       <span id={valueId}>{value}</span>
-      <button id={incrementId}><FontAwesomeIcon icon="plus" /></button>
+      <button 
+        id={incrementId}
+        onClick={(e) => click(e, incrementId)}
+        >
+        <FontAwesomeIcon icon="plus" />
+      </button>
     </div>
   );
 }
