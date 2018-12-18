@@ -1,9 +1,12 @@
 import React from 'react'
 
 export default function Button(props) {
-    const { type } = props;
+    const { type, toggleTimer, onReset } = props;
 
   return (
-    <button id={type} className={type}>{props.children}</button>
+    <button 
+        id={type} 
+        className={type}
+        onClick={type === 'start_stop' ? toggleTimer : onReset}>{props.children}</button>
   );
 }
