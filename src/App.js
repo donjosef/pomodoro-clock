@@ -46,6 +46,15 @@ class App extends Component {
     }));
   }
   
+  resetHandler = () => {
+    this.setState({
+      breakLength: defaultBreak,
+      sessionLength: defaultSession,
+      sessionSeconds: defaultSession * 60,
+      mode: 'session',
+      play: false
+    });
+  }
   render() {
     return (
       <div className="App">
