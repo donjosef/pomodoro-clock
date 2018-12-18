@@ -34,6 +34,9 @@ class App extends Component {
     if(prevState.play !== this.state.play && this.state.play) {
       this.interval = setInterval(this.timer, 1000)
     }
+    if(prevState.play !== this.state.play && !this.state.play) {
+      clearInterval(this.interval);
+    }
     
   }
 
