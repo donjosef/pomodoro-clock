@@ -46,6 +46,13 @@ class App extends Component {
       })
     }
 
+    if(prevState.breakLength !== this.state.breakLength) {
+      /*Every time i click on controls to change the values of break, change the respective seconds to display the correct break on Display*/
+      this.setState({
+        breakSeconds: this.state.breakLength * 60
+      })
+    }
+
     if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds === 0) {
       clearInterval(this.sessionInterval);
       this.setState({
@@ -53,6 +60,15 @@ class App extends Component {
         sessionSeconds: this.state.sessionLength * 60
       });
       this.breakInterval = setInterval(this.breakTimer, 1000);
+    }
+
+    if(prevState.breakSeconds !== this.state.breakSeconds && this.state.breakSeconds === 0) {
+      clearInterval(this.breakInterval);
+      this.setState({
+        mode: 'session',
+        breakSeconds: this.state.breakLength * 60
+      });
+      this.sessionInterval = setInterval(this.sessionTimer, 1000);
     }
     
   }
