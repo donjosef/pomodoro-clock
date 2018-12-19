@@ -49,7 +49,8 @@ class App extends Component {
     if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds === 0) {
       clearInterval(this.sessionInterval);
       this.setState({
-        mode: 'break'
+        mode: 'break',
+        sessionSeconds: this.state.sessionLength * 60
       });
       this.breakInterval = setInterval(this.breakTimer, 1000);
     }
