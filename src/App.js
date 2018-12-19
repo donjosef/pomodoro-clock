@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Controls from './components/Controls/Controls';
 import Display from './components/Display/Display';
 import Button from './components/Button/Button';
+import AudioSrc from './media/BeepSound.wav';
 import './App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -60,6 +61,8 @@ class App extends Component {
         sessionSeconds: this.state.sessionLength * 60
       });
       this.breakInterval = setInterval(this.breakTimer, 1000);
+
+      this.audio.play();
     }
 
     if(prevState.breakSeconds !== this.state.breakSeconds && this.state.breakSeconds === 0) {
@@ -146,6 +149,8 @@ class App extends Component {
           seconds={this.state.mode === 'session' ? this.state.sessionSeconds : this.state.breakSeconds}/>
        <Button type="start_stop" toggleTimer={this.toggleTimer}><FontAwesomeIcon icon={this.state.play ? 'pause' : 'play'} /></Button>
        <Button type="reset" onReset={this.resetHandler}>RESET</Button>
+
+       <audio id="beep" src={AudioSrc} ref={(audio) => this.audio = audio}></audio>
       </div>
     );
   }
