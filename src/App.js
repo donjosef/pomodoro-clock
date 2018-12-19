@@ -20,6 +20,7 @@ class App extends Component {
     breakLength: defaultBreak,
     sessionLength: defaultSession,
     sessionSeconds: defaultSession * 60,
+    breakSeconds: defaultBreak * 60,
     mode: 'session',
     play: false
   }
@@ -32,26 +33,38 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(prevState.play !== this.state.play && this.state.play) {
-      this.interval = setInterval(this.timer, 1000)
+      this.sessionInterval = setInterval(this.sessionTimer, 1000)
     }
     if(prevState.play !== this.state.play && !this.state.play) {
-      clearInterval(this.interval);
+      clearInterval(this.sessionInterval);
     }
-    
     
     if(prevState.sessionLength !== this.state.sessionLength) {
       /*Every time i click on controls to change the values of session, change the respective seconds to display the correct time on Display*/
       this.setState({
         sessionSeconds: this.state.sessionLength * 60
       })
-     
+    }
+
+    if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds === 0) {
+      clearInterval(this.sessionInterval);
+      this.setState({
+        mode: 'break'
+      });
+      this.breakInterval = setInterval(this.breakTimer, 1000);
     }
     
   }
 
-  timer = () => {
+  sessionTimer = () => {
     this.setState(prevState => ({
-      sessionSeconds: prevState.sessionSeconds -= 1
+      sessionSeconds: prevState.sessionSeconds - 1
+    }));
+  }
+
+  breakTimer = () => {
+    this.setState(prevState => ({
+      breakSeconds: prevState.breakSeconds - 1
     }));
   }
   
@@ -111,7 +124,9 @@ class App extends Component {
         <Controls click={this.changeLengthValues} label="break" value={this.state.breakLength}/>
         <Controls click={this.changeLengthValues} label="session" value={this.state.sessionLength}/>
        </div>
-       <Display mode={this.state.mode} seconds={this.state.sessionSeconds}/>
+       <Display 
+          mode={this.state.mode} 
+          seconds={this.state.mode === 'session' ? this.state.sessionSeconds : this.state.breakSeconds}/>
        <Button type="start_stop" toggleTimer={this.toggleTimer}><FontAwesomeIcon icon={this.state.play ? 'pause' : 'play'} /></Button>
        <Button type="reset" onReset={this.resetHandler}>RESET</Button>
       </div>
