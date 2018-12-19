@@ -55,17 +55,19 @@ class App extends Component {
     }
 
     if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds === 0) {
-      clearInterval(this.sessionInterval);
-      this.setState({
-        mode: 'break',
-        sessionSeconds: this.state.sessionLength * 60
-      });
-      this.breakInterval = setInterval(this.breakTimer, 1000);
-
       this.audio.play();
     }
 
-    if(prevState.breakSeconds !== this.state.breakSeconds && this.state.breakSeconds === 0) {
+    if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds < 0) {
+      clearInterval(this.sessionInterval);
+        this.setState({
+          mode: 'break',
+          sessionSeconds: this.state.sessionLength * 60
+        });
+      this.breakInterval = setInterval(this.breakTimer, 1000);
+    }
+
+    if(prevState.breakSeconds !== this.state.breakSeconds && this.state.breakSeconds < 0) {
       clearInterval(this.breakInterval);
       this.setState({
         mode: 'session',
