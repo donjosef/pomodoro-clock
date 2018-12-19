@@ -128,10 +128,12 @@ class App extends Component {
   }
 
   resetHandler = () => {
+    clearInterval(this.breakInterval);
     this.setState({
       breakLength: defaultBreak,
       sessionLength: defaultSession,
       sessionSeconds: defaultSession * 60,
+      breakSeconds: defaultBreak * 60,
       mode: 'session',
       play: false
     });
