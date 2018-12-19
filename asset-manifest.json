@@ -1,0 +1,14 @@
+{
+  "main.css": "/pomodoro-clock/static/css/main.605ae48e.chunk.css",
+  "main.js": "/pomodoro-clock/static/js/main.988ba30a.chunk.js",
+  "main.js.map": "/pomodoro-clock/static/js/main.988ba30a.chunk.js.map",
+  "static/js/1.56c01979.chunk.js": "/pomodoro-clock/static/js/1.56c01979.chunk.js",
+  "static/js/1.56c01979.chunk.js.map": "/pomodoro-clock/static/js/1.56c01979.chunk.js.map",
+  "runtime~main.js": "/pomodoro-clock/static/js/runtime~main.f41d346c.js",
+  "runtime~main.js.map": "/pomodoro-clock/static/js/runtime~main.f41d346c.js.map",
+  "static/media/BeepSound.wav": "/pomodoro-clock/static/media/BeepSound.988833bf.wav",
+  "static/css/main.605ae48e.chunk.css.map": "/pomodoro-clock/static/css/main.605ae48e.chunk.css.map",
+  "index.html": "/pomodoro-clock/index.html",
+  "precache-manifest.0785c075987eb86d08739fad5a704b9b.js": "/pomodoro-clock/precache-manifest.0785c075987eb86d08739fad5a704b9b.js",
+  "service-worker.js": "/pomodoro-clock/service-worker.js"
+}
