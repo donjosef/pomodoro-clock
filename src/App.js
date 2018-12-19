@@ -129,6 +129,8 @@ class App extends Component {
 
   resetHandler = () => {
     clearInterval(this.breakInterval);
+    this.audio.currentTime = 0;
+    this.audio.pause();
     this.setState({
       breakLength: defaultBreak,
       sessionLength: defaultSession,
@@ -138,6 +140,7 @@ class App extends Component {
       play: false
     });
   }
+
   render() {
     return (
       <div className="App">
