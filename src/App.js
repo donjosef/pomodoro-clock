@@ -33,41 +33,41 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.play !== this.state.play && this.state.play) {
+    if (prevState.play !== this.state.play && this.state.play) {
       this.sessionInterval = setInterval(this.sessionTimer, 1000)
     }
-    if(prevState.play !== this.state.play && !this.state.play) {
+    if (prevState.play !== this.state.play && !this.state.play) {
       clearInterval(this.sessionInterval);
     }
-    
-    if(prevState.sessionLength !== this.state.sessionLength) {
+
+    if (prevState.sessionLength !== this.state.sessionLength) {
       /*Every time i click on controls to change the values of session, change the respective seconds to display the correct time on Display*/
       this.setState({
         sessionSeconds: this.state.sessionLength * 60
       })
     }
 
-    if(prevState.breakLength !== this.state.breakLength) {
+    if (prevState.breakLength !== this.state.breakLength) {
       /*Every time i click on controls to change the values of break, change the respective seconds to display the correct break on Display*/
       this.setState({
         breakSeconds: this.state.breakLength * 60
       })
     }
 
-    if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds === 0) {
+    if (prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds === 0) {
       this.audio.play();
     }
 
-    if(prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds < 0) {
+    if (prevState.sessionSeconds !== this.state.sessionSeconds && this.state.sessionSeconds < 0) {
       clearInterval(this.sessionInterval);
-        this.setState({
-          mode: 'break',
-          sessionSeconds: this.state.sessionLength * 60
-        });
+      this.setState({
+        mode: 'break',
+        sessionSeconds: this.state.sessionLength * 60
+      });
       this.breakInterval = setInterval(this.breakTimer, 1000);
     }
 
-    if(prevState.breakSeconds !== this.state.breakSeconds && this.state.breakSeconds < 0) {
+    if (prevState.breakSeconds !== this.state.breakSeconds && this.state.breakSeconds < 0) {
       clearInterval(this.breakInterval);
       this.setState({
         mode: 'session',
@@ -75,7 +75,7 @@ class App extends Component {
       });
       this.sessionInterval = setInterval(this.sessionTimer, 1000);
     }
-    
+
   }
 
   sessionTimer = () => {
@@ -89,7 +89,7 @@ class App extends Component {
       breakSeconds: prevState.breakSeconds - 1
     }));
   }
-  
+
   handleChange = type => amount => {
     this.setState(prevState => ({
       [type]: prevState[type] + amount
@@ -100,33 +100,33 @@ class App extends Component {
   handleBreakChange = this.handleChange('breakLength');
 
   changeLengthValues = (e, id) => {
-    if(this.state.play) {
+    if (this.state.play) {
       return;
     }
-    switch(id) {
+    switch (id) {
       case 'break-decrement':
-       if(this.state.breakLength > 1) {
-         this.handleBreakChange(-1)
-       }
-      break;
+        if (this.state.breakLength > 1) {
+          this.handleBreakChange(-1)
+        }
+        break;
 
       case 'break-increment':
-       if(this.state.breakLength < 60) {
-        this.handleBreakChange(1)
-       }
-      break;
+        if (this.state.breakLength < 60) {
+          this.handleBreakChange(1)
+        }
+        break;
 
       case 'session-decrement':
-       if(this.state.sessionLength > 1) {
-        this.handleSessionChange(-1)
-       }
-      break;
+        if (this.state.sessionLength > 1) {
+          this.handleSessionChange(-1)
+        }
+        break;
 
       case 'session-increment':
-       if(this.state.sessionLength < 60) {
-        this.handleSessionChange(1)
-       }
-      break;
+        if (this.state.sessionLength < 60) {
+          this.handleSessionChange(1)
+        }
+        break;
     }
   }
 
@@ -147,18 +147,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-       <h1 className="app-title">Pomodoro Clock</h1>
-       <div className="Controls-Wrapper">
-        <Controls click={this.changeLengthValues} label="break" value={this.state.breakLength}/>
-        <Controls click={this.changeLengthValues} label="session" value={this.state.sessionLength}/>
-       </div>
-       <Display 
-          mode={this.state.mode} 
-          seconds={this.state.mode === 'session' ? this.state.sessionSeconds : this.state.breakSeconds}/>
-       <Button type="start_stop" toggleTimer={this.toggleTimer}><FontAwesomeIcon icon={this.state.play ? 'pause' : 'play'} /></Button>
-       <Button type="reset" onReset={this.resetHandler}>RESET</Button>
+        <h1 className="app-title">Pomodoro Clock</h1>
+        <div className="Controls-Wrapper">
+          <Controls click={this.changeLengthValues} label="break" value={this.state.breakLength} />
+          <Controls click={this.changeLengthValues} label="session" value={this.state.sessionLength} />
+        </div>
+        <Display
+          mode={this.state.mode}
+          seconds={this.state.mode === 'session' ? this.state.sessionSeconds : this.state.breakSeconds} />
+        <Button
+          type="start_stop"
+          handler={this.toggleTimer}>
+          <FontAwesomeIcon icon={this.state.play ? 'pause' : 'play'} />
+        </Button>
+        <Button type="reset" handler={this.resetHandler}>RESET</Button>
 
-       <audio id="beep" src={AudioSrc} ref={(audio) => this.audio = audio}></audio>
+        <audio id="beep" src={AudioSrc} ref={(audio) => this.audio = audio}></audio>
       </div>
     );
   }
