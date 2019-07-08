@@ -90,6 +90,15 @@ class App extends Component {
     }));
   }
   
+  handleChange = type => amount => {
+    this.setState(prevState => ({
+      [type]: prevState[type] + amount
+    }));
+  }
+
+  handleSessionChange = this.handleChange('sessionLength');
+  handleBreakChange = this.handleChange('breakLength');
+
   changeLengthValues = (e, id) => {
     if(this.state.play) {
       return;
@@ -97,33 +106,25 @@ class App extends Component {
     switch(id) {
       case 'break-decrement':
        if(this.state.breakLength > 1) {
-        this.setState(prevState => ({
-          breakLength: prevState.breakLength - 1
-        }));
+         this.handleBreakChange(-1)
        }
       break;
 
       case 'break-increment':
        if(this.state.breakLength < 60) {
-        this.setState(prevState => ({
-          breakLength: prevState.breakLength + 1
-        }));
+        this.handleBreakChange(1)
        }
       break;
 
       case 'session-decrement':
        if(this.state.sessionLength > 1) {
-        this.setState(prevState => ({
-          sessionLength: prevState.sessionLength - 1
-        }));
+        this.handleSessionChange(-1)
        }
       break;
 
       case 'session-increment':
        if(this.state.sessionLength < 60) {
-        this.setState(prevState => ({
-          sessionLength: prevState.sessionLength + 1
-        }));
+        this.handleSessionChange(1)
        }
       break;
     }
